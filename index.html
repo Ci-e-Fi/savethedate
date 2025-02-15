@@ -40,19 +40,27 @@
         Il tuo browser non supporta l'elemento audio.
     </audio>
     <div class="container">
-        <a href="https://www.matrimonio.com/web/cinzia-e-filippo" target="_blank" onclick="playAudio()">
+        <a href="#" id="image-link">
             <img src="savethedate.jpg" alt="Save the Date" class="clickable-image">
         </a>
         <button id="play-audio-btn" onclick="manualPlay()">Riproduci Musica</button>
     </div>
     <script>
-        function playAudio() {
+        var clickCount = 0;
+        document.getElementById("image-link").addEventListener("click", function(event) {
+            event.preventDefault();
             var audio = document.getElementById("background-audio");
-            audio.play().catch(function(error) {
-                console.log("Autoplay bloccato, mostrando il pulsante");
-                document.getElementById("play-audio-btn").style.display = "block";
-            });
-        }
+            if (clickCount === 0) {
+                audio.play().catch(function(error) {
+                    console.log("Autoplay bloccato, mostrando il pulsante");
+                    document.getElementById("play-audio-btn").style.display = "block";
+                });
+            } else {
+                window.location.href = "https://www.matrimonio.com/web/cinzia-e-filippo";
+            }
+            clickCount++;
+        });
+
         function manualPlay() {
             var audio = document.getElementById("background-audio");
             audio.play();
