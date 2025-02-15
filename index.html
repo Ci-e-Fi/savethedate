@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-    <audio id="background-audio" loop>
+    <audio id="background-audio">
         <source src="audio.mp3" type="audio/mpeg">
         Il tuo browser non supporta l'elemento audio.
     </audio>
@@ -47,18 +47,25 @@
         var image = document.getElementById("display-image");
         
         image.addEventListener("click", function() {
-            audio.play();
-            image.src = "savethedate.jpg"; // Cambia l'immagine con quella con l'hyperlink
-            image.style.cursor = "default";
-            
-            // Dopo aver cambiato l'immagine, aggiungere un link attivo
-            setTimeout(() => {
-                var link = document.createElement("a");
-                link.href = "https://www.matrimonio.com/web/cinzia-e-filippo";
-                link.target = "_blank";
-                link.appendChild(image);
-                document.querySelector(".container").appendChild(link);
-            }, 300);
+            if (!image.dataset.clicked) {
+                audio.play();
+                image.src = "savethedate.jpg"; // Cambia l'immagine con quella con l'hyperlink
+                image.style.cursor = "default";
+                image.dataset.clicked = true;
+                
+                // Dopo aver cambiato l'immagine, aggiungere un link attivo
+                setTimeout(() => {
+                    var link = document.createElement("a");
+                    link.href = "https://www.matrimonio.com/web/cinzia-e-filippo";
+                    link.target = "_blank";
+                    link.appendChild(image);
+                    link.addEventListener("click", function() {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    });
+                    document.querySelector(".container").appendChild(link);
+                }, 300);
+            }
         });
     </script>
 </body>
