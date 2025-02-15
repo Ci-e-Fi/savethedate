@@ -40,32 +40,26 @@
         Il tuo browser non supporta l'elemento audio.
     </audio>
     <div class="container">
-        <a href="#" id="image-link">
-            <img src="savethedate.jpg" alt="Save the Date" class="clickable-image">
-        </a>
-        <button id="play-audio-btn" onclick="manualPlay()">Riproduci Musica</button>
+        <img src="busta-chiusa.jpg" alt="Busta Chiusa" class="clickable-image" id="display-image">
     </div>
     <script>
-        var clickCount = 0;
-        document.getElementById("image-link").addEventListener("click", function(event) {
-            event.preventDefault();
-            var audio = document.getElementById("background-audio");
-            if (clickCount === 0) {
-                audio.play().catch(function(error) {
-                    console.log("Autoplay bloccato, mostrando il pulsante");
-                    document.getElementById("play-audio-btn").style.display = "block";
-                });
-            } else {
-                window.location.href = "https://www.matrimonio.com/web/cinzia-e-filippo";
-            }
-            clickCount++;
-        });
-
-        function manualPlay() {
-            var audio = document.getElementById("background-audio");
+        var audio = document.getElementById("background-audio");
+        var image = document.getElementById("display-image");
+        
+        image.addEventListener("click", function() {
             audio.play();
-            document.getElementById("play-audio-btn").style.display = "none";
-        }
+            image.src = "savethedate.jpg"; // Cambia l'immagine con quella con l'hyperlink
+            image.style.cursor = "default";
+            
+            // Dopo aver cambiato l'immagine, aggiungere un link attivo
+            setTimeout(() => {
+                var link = document.createElement("a");
+                link.href = "https://www.matrimonio.com/web/cinzia-e-filippo";
+                link.target = "_blank";
+                link.appendChild(image);
+                document.querySelector(".container").appendChild(link);
+            }, 300);
+        });
     </script>
 </body>
 </html>
