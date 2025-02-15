@@ -21,6 +21,17 @@
             height: auto;
             cursor: pointer;
         }
+        #play-audio-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -32,11 +43,20 @@
         <a href="https://www.matrimonio.com/web/cinzia-e-filippo" target="_blank" onclick="playAudio()">
             <img src="savethedate.jpg" alt="Save the Date" class="clickable-image">
         </a>
+        <button id="play-audio-btn" onclick="manualPlay()">Riproduci Musica</button>
     </div>
     <script>
         function playAudio() {
             var audio = document.getElementById("background-audio");
+            audio.play().catch(function(error) {
+                console.log("Autoplay bloccato, mostrando il pulsante");
+                document.getElementById("play-audio-btn").style.display = "block";
+            });
+        }
+        function manualPlay() {
+            var audio = document.getElementById("background-audio");
             audio.play();
+            document.getElementById("play-audio-btn").style.display = "none";
         }
     </script>
 </body>
