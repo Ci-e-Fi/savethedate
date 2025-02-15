@@ -24,14 +24,20 @@
     </style>
 </head>
 <body>
-    <audio autoplay>
+    <audio id="background-audio">
         <source src="audio.mp3" type="audio/mpeg">
         Il tuo browser non supporta l'elemento audio.
     </audio>
     <div class="container">
-        <a href="https://www.matrimonio.com/web/cinzia-e-filippo" target="_blank">
+        <a href="https://www.matrimonio.com/web/cinzia-e-filippo" target="_blank" onclick="playAudio()">
             <img src="savethedate.jpg" alt="Save the Date" class="clickable-image">
         </a>
     </div>
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("background-audio");
+            audio.play();
+        }
+    </script>
 </body>
 </html>
